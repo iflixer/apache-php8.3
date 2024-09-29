@@ -7,6 +7,7 @@ RUN cd /tmp \
     && rm -Rf ioncube.tar.gz ioncube \
     && echo "zend_extension=/usr/local/lib/php/extensions/no-debug-non-zts-20230831/ioncube_loader_lin_8.3.so" > /usr/local/etc/php/conf.d/00_docker-php-ext-ioncube_loader_lin_8.3.ini
 
+RUN echo "zend_extension=/usr/local/lib/php/extensions/no-debug-non-zts-20230831/opcache.so" > /usr/local/etc/php/conf.d/01-opcache.ini
 
 RUN docker-php-ext-install pdo_mysql mysqli
 
