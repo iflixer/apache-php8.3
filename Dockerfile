@@ -32,3 +32,5 @@ RUN pecl install redis && docker-php-ext-enable redis
 RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
 
 COPY ./90-php-flix.ini "$PHP_INI_DIR/conf.d/"
+
+RUN echo "$(date +%s)" >> /etc/container_build_timestamp
