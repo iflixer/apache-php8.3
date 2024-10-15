@@ -1,14 +1,13 @@
 FROM php:8.1-apache
 
 RUN cd /tmp \
-	&& curl -o ioncube.tar.gz https://downloads.ioncube.com/loader_downloads/ioncube_loaders_lin_x86-64.tar.gz \
+	&& curl -o ioncube.tar.gz https://downloads.ioncube.com/loader_downloads/ioncube_loaders_lin_aarch64.tar.gz \
     && tar -xvvzf ioncube.tar.gz \
     && mv ioncube/ioncube_loader_lin_8.1.so /usr/local/lib/php/extensions/* \
     && rm -Rf ioncube.tar.gz ioncube \
     && echo "zend_extension=/usr/local/lib/php/extensions/no-debug-non-zts-20210902/ioncube_loader_lin_8.1.so" > /usr/local/etc/php/conf.d/00_docker-php-ext-ioncube_loader_lin_8.1.ini
 
 RUN echo "zend_extension=/usr/local/lib/php/extensions/no-debug-non-zts-20210902/opcache.so" > /usr/local/etc/php/conf.d/01-opcache.ini
-
 
 RUN docker-php-ext-install pdo_mysql mysqli
 
@@ -34,3 +33,4 @@ RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
 COPY ./90-php-flix.ini "$PHP_INI_DIR/conf.d/"
 
 RUN echo "$(date +%s)" >> /etc/container_build_timestamp
+
